@@ -2,10 +2,10 @@
 
 本系统是一个基于 AI 的中高压输配电、智能开关柜及电网设备最新展会及技术要闻追踪雷达。
 
-不同于传统资讯系统硬编码特定公司偏好，本系统支持**完全动态的企业画像定制**。系统承袭了 **`follow-builders`** 经典的高内聚低耦合设计思想：
+本系统支持**完全动态的企业画像定制与区域市场强力过滤**。系统防噪音机制让用户能真正实现按需推送。系统承袭了 **`follow-builders`** 经典的高内聚低耦合设计思想：
 
 *   **中央调度引擎**：每天自动拉取国内外最核心的输配电及储能大展（EP Shanghai / MEE 迪拜展 / POWERGEN 北美展 / ees 欧洲展）、专业贸易展会目录（EventsEye），生成去重且剔除过期的静态 JSON。
-*   **企业画像智能重混 (LLM Remix)**：大模型基于用户在本地配置文件中动态定义的企业类型、核心产品类别和目标巨头客户，自适应抓取最相关的技术创新与采购风向标。
+*   **企业画像与地区市场重混 (LLM Remix & Filtering)**：大模型基于用户在本地配置文件中动态定义的**主营产品**、**目标采购巨头**，以及**目标地区市场**。自动对抓取到的展会列表进行**物理级硬核过滤**，只推送目标地区范围内的展会，杜绝无关信息噪音。
 *   **多端智能投递**：排版优雅的 Markdown 精报可推送到 **控制台 stdout**、**Telegram 个人频道**、**Resend 个人邮箱**，以及专为企业协作适配的 **飞书群/企业微信群机器人 Webhook**。
 
 ---
@@ -27,10 +27,10 @@ graph TD
     B -->|过期过滤 & 存量去重| I[更新 state-feed.json]
     B -->|发布最新展会 Feed| J[生成 feed-exhibitions.json]
     
-    subgraph AI 重混与分发层
+    subgraph AI 重混与物理过滤层
         J --> K[prepare-digest.js 编排打包]
-        K -->|装载动态企业画像与专属 Prompts| L[AI 大模型读取并智能排版]
-        L -->|Markdown 企业定制精装简报| M[deliver.js 自动投递]
+        K -->|装载地区市场与专属 Prompts| L[AI 大模型物理级过滤并智能排版]
+        L -->|Markdown 企业与地区定制精装简报| M[deliver.js 自动投递]
         M -->|终端输出| N[Terminal stdout]
         M -->|公司群通知| O[飞书/企业微信 Webhook]
         M -->|私人频道| P[Telegram / 电子邮件]
@@ -63,20 +63,21 @@ node prepare-digest.js
 ## 🛠 配置文件说明
 
 ### 1. 用户个性化配置与动态企业画像：`~/.power-expo-tracker/config.json`
-在用户家目录创建配置目录，用以存放你的交付偏好和**动态企业自画像**：
+在用户家目录创建配置目录，用以存放你的交付偏好、**动态企业自画像及目标区域市场**：
 ```json
 {
   "language": "zh", 
   "sectors": ["all"],
   "delivery": {
     "method": "feishu",
-    "feishuWebhookUrl": "https://open.feishu.cn/open-apis/bot/v2/hook/xxxx-xxxx-xxxx"
+    "feishuWebhookUrl": "https://open.feishu.cn/open-apis/bot/v2/hook/xxxx"
   },
   "companyProfile": {
     "name": "浙江开化七一电器股份有限公司",
     "type": "中高压电力装备与电网绝缘器件制造厂商",
     "products": ["固封极柱", "套管", "绝缘子", "触头盒", "开关柜"],
-    "targetOems": ["施耐德", "伊顿", "西门子", "东芝", "ABB", "国家电网", "南方电网"]
+    "targetOems": ["施耐德", "伊顿", "西门子", "东芝", "ABB", "国家电网", "南方电网"],
+    "targetRegions": ["国内", "欧洲", "中东"]
   },
   "onboardingComplete": true
 }
@@ -87,6 +88,7 @@ node prepare-digest.js
     *   `type`: 核心定位/行业分类。
     *   `products`: 核心产品类别列表，AI 会据此筛选最契合的技术趋势。
     *   `targetOems`: 核心要追踪的 Tier-1 大型 OEM 采购商列表。
+    *   `targetRegions`: **目标区域市场过滤网**。支持的值为：`"国内"` (中国大陆/台港澳)、`"北美"` (美加墨)、`"欧洲"` (德法英意等)、`"中东"` (阿联酋沙特等)、`"东南亚"` (泰越印尼等)、`"all"` (不进行任何过滤)。**不在该配置列表内的地区展会将自动被 AI 物理剔除，零打扰**。
 
 ### 2. API 密钥配置：`~/.power-expo-tracker/.env`
 如果启用了 Telegram 或 Resend 邮件投递，需要在用户配置的 `.env` 中填写对应的 API Key：
@@ -104,9 +106,9 @@ WECOM_WEBHOOK_URL=your_wecom_webhook_url
 
 ---
 
-## 📝 大模型动态重混规则 (`prompts/` 目录)
+## 📝 大模型动态重混与过滤规则 (`prompts/` 目录)
 
 系统提供三套高水准的英文/中文混合 Prompt 控制大模型输出：
-1.  `summarize-exhibitions.md`：**动态重混规则**。指示 AI 自动读取 `config.companyProfile` 中的字段，动态提炼契合企业核心产品的技术趋势，并精准追踪企业自定义的核心采购商在展会中的发布。
+1.  `summarize-exhibitions.md`：**动态重混与地理过滤规则**。指示 AI 自动读取 `config.companyProfile.targetRegions` 字段，对展会列表进行严格的物理屏蔽，并对剩余展会进行绝缘/智能柜深度分析。
 2.  `digest-intro.md`：排版骨架设计。设计了精美的 Emoji 系统及数据看板统计。
 3.  `translate.md`：行业词汇翻译映射。内置精细的电力词汇字典（如将 “UHV” 精准翻译成 “特高压”、“Switchgear” 翻译成 “开关柜/环网柜”、“Embedded Pole” 翻译成 “固封极柱”），支持双语段落级对照排版。
