@@ -1,0 +1,39 @@
+{
+  "scrapers": [
+    {
+      "name": "EP Shanghai (上海国际电力电工展)",
+      "id": "ep-shanghai",
+      "indexUrl": "https://www.epchinashow.com/EP/idx/sim",
+      "type": "ep-china",
+      "lang": "zh"
+    },
+    {
+      "name": "Middle East Energy (迪拜中东电力展)",
+      "id": "mee-dubai",
+      "indexUrl": "https://www.middleeast-energy.com/en/home.html",
+      "type": "mee",
+      "lang": "en"
+    },
+    {
+      "name": "POWERGEN International (美国发电及电网现代化展)",
+      "id": "powergen",
+      "indexUrl": "https://www.powergen.com/",
+      "type": "powergen",
+      "lang": "en"
+    },
+    {
+      "name": "ees Europe (欧洲最大储能与能源大展)",
+      "id": "ees-europe",
+      "indexUrl": "https://www.ees-europe.com/home",
+      "type": "ees",
+      "lang": "en"
+    },
+    {
+      "name": "EventsEye (Energy Production & Transportation)",
+      "id": "eventseye",
+      "indexUrl": "https://www.eventseye.com/fairs/c1_trade-shows_energy-production-transportation.html",
+      "type": "eventseye",
+      "lang": "en"
+    }
+  ]
+}

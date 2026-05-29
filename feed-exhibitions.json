@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-05-29T08:14:15.824Z",
+  "exhibitionsCount": 4,
+  "exhibitions": [
+    {
+      "source": "EP Shanghai (上海国际电力电工展)",
+      "id": "ep-shanghai-annual",
+      "name": "EP Shanghai 2026 国际电力电工展",
+      "dates": "3 – 5 Dec 2026",
+      "location": "上海新国际博览中心 (Hall N1-N5, W4-W5)",
+      "url": "https://www.epchinashow.com",
+      "description": "Join EP Shanghai 2026, the leading electric power exhibition in China, organized by the China Electricity Council and the State Grid Corporation of China. Visit EP from December 3-5 at the Shanghai New International Expo Centre (Hall N1-N5, W4-W5).",
+      "tags": [
+        "特高压",
+        "输配电",
+        "智能电网",
+        "清洁能源",
+        "电力装备"
+      ]
+    },
+    {
+      "source": "Middle East Energy (迪拜中东电力展)",
+      "id": "mee-dubai-annual",
+      "name": "Middle East Energy (MEE) 迪拜中东电力展",
+      "dates": "2027年4月 (年度举办)",
+      "location": "Dubai World Trade Centre, UAE",
+      "url": "https://www.middleeast-energy.com",
+      "description": "中东及非洲地区规模最大、最专业的输配电、智能电网、新能源及关键电力保护大展。是环氧绝缘件、中高压开关设备及零部件企业出海中东的黄金通道。",
+      "tags": [
+        "高压输配电",
+        "中东出海",
+        "开关柜",
+        "智能电网"
+      ]
+    },
+    {
+      "source": "POWERGEN International (美国发电及电网现代化展)",
+      "id": "powergen-annual",
+      "name": "POWERGEN International 北美发电及电网现代化展",
+      "dates": "2027年2月 (年度举办)",
+      "location": "美国 (巡回举办)",
+      "url": "https://www.powergen.com/",
+      "description": "北美地区最权威、历史最悠久的发电、输配电装备及电网现代化产业展。各大国际电气巨头（Schneider、Eaton、Siemens）展示其新一代配网与绝缘开关设备的核心舞台。",
+      "tags": [
+        "北美市场",
+        "电网现代化",
+        "配电设备",
+        "绝缘件"
+      ]
+    },
+    {
+      "source": "ees Europe (欧洲最大储能与能源大展)",
+      "id": "ees-europe-annual",
+      "name": "ees Europe 欧洲最大储能与电池博览会 (The smarter E Europe)",
+      "dates": "2026年6月 / 2027年6月 (年度举办)",
+      "location": "Messe München, Germany",
+      "url": "https://www.ees-europe.com/home",
+      "description": "欧洲最大、最顶级的电池与新能源储能展，与 Intersolar 同期举办。涵盖电化学储能、分布式电网高低压接入、固态/环氧绝缘母线及连接器件等尖端技术。",
+      "tags": [
+        "欧洲市场",
+        "新能源储能",
+        "高压接入",
+        "绝缘母线"
+      ]
+    }
+  ],
+  "errors": [
+    "EventsEye: HTTP error 404 (Likely cloud IP blocking. Skipping gracefully for Local Mode fallback)"
+  ]
+}
