@@ -16,16 +16,16 @@
 graph TD
     A[数据源 config/default-sources.json] --> B[generate-feed.js 本地/云端采集]
     
-    subgraph 云端 GitHub Actions (免开机)
+    subgraph CloudActions ["云端 GitHub Actions (免开机)"]
         B1[定时触发 Cloud Scraper] -->|执行并清洗| B2[更新远程仓库 JSON]
     end
     
-    subgraph 本地数据准备方式
+    subgraph LocalPrepare ["本地数据准备方式"]
         LocalScrape[node generate-feed.js 本地爬取] --> J[生成 feed-exhibitions.json]
         B2 -->|node fetch-remote-feed.js 极速同步| J
     end
     
-    subgraph 数据采集层 (Scrapers)
+    subgraph Scrapers ["数据采集层 (Scrapers)"]
         B -->|Cheerio 解析| C[EP Shanghai 官网]
         B -->|HTTP/iCal 探测| D[ees Europe 德国展]
         B -->|HTTP/iCal 探测| E[POWERGEN 北美展]
@@ -36,7 +36,7 @@ graph TD
     B -->|过期过滤 & 存量去重| I[更新 state-feed.json]
     B --> J
     
-    subgraph AI 重混与物理过滤层
+    subgraph AIRemix ["AI 重混与物理过滤层"]
         J --> K[prepare-digest.js 编排打包]
         K -->|装载地区市场与专属 Prompts| L[AI 大模型物理级过滤并智能排版]
         L -->|Markdown 企业与地区定制精装简报| M[deliver.js 自动投递]
