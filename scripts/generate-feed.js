@@ -301,7 +301,7 @@ async function fetchGoogleNewsRSS(feed, errors) {
       // Clean up title (remove Google News source suffix like " - 北极星电力网")
       title = title.replace(/\s+-\s+[^-\s]+$/, "");
       
-      // Analyze title relevance to power exhibitions (specifically tailored for high-voltage insulation & grid components for 71 Electrical)
+      // Analyze title relevance to power exhibitions (specifically tailored for high-voltage insulation & grid components based on company profile)
       const isRelevance = feed.lang === "zh"
         ? (title.includes("电力") || title.includes("电工") || title.includes("电网") || title.includes("储能") || title.includes("新能源") || title.includes("输配电") || title.includes("开关柜") || title.includes("固封极柱") || title.includes("套管") || title.includes("绝缘") || title.includes("避雷器") || title.includes("母线")) &&
           (title.includes("展") || title.includes("博览会") || title.includes("论坛") || title.includes("会展") || title.includes("年会") || title.includes("大会") || title.includes("召开") || title.includes("开幕") || title.includes("亮相"))

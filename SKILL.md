@@ -1,6 +1,6 @@
 ---
 name: power-expo-tracker
-description: Power Electricity Exhibitions Tracker (71电器专属版) — Monitors premium official power trade fairs (Middle East Energy MEE, POWERGEN International, ees Europe), EventsEye global T&D directory, and Google News RSS feeds (covering IEEE PES, CIGRE, CIRED, and high-voltage insulation terms). Delivers tailored briefs analyzing insulation components and switchgears, tracking targets like Schneider, Eaton, Siemens, ABB, and State Grid.
+description: Power Electricity Exhibitions Tracker (Enterprise Edition) — Monitors premium official power trade fairs (Middle East Energy MEE, POWERGEN International, ees Europe), EventsEye global T&D directory, and Google News RSS feeds (covering IEEE PES, CIGRE, CIRED, and grid components). Delivers tailored briefs analyzing grid components, switchgears, and power equipments, tracking target OEMs like Siemens, Schneider, Eaton, and ABB.
 ---
 
 # Power Exhibition Tracker (电力行业展会雷达 - 动态版)
@@ -26,7 +26,7 @@ Ask the user: **"请告诉我您的企业名称是什么？以及您主要做哪
 
 You can build this profile two ways:
 1.  **AI Auto-Retrieval (Recommended)**: 
-    *   Once the user provides the company name (e.g. *"浙江开化七一电器"*), **immediately use your `search_web` tool** to query the company name.
+    *   Once the user provides the company name (e.g. *"某某变压器公司"*), **immediately use your `search_web` tool** to query the company name.
     *   Extract the company type, core product lines, and target OEM clients.
     *   Present the discovered profile to the user for validation.
 2.  **User Manual Input**:
@@ -74,10 +74,10 @@ Create the local directory `~/.power-expo-tracker/` and save `config.json` incor
     "email": "<email if email>"
   },
   "companyProfile": {
-    "name": "<Company Name, e.g. 浙江开化七一电器股份有限公司>",
-    "type": "<Company Type, e.g. 中高压电力装备与电网绝缘器件制造厂商>",
-    "products": ["固封极柱", "套管", "绝缘子", "触头盒", "开关柜"],
-    "targetOems": ["施耐德", "伊顿", "西门子", "东芝", "ABB", "国家电网", "南方电网"],
+    "name": "<Company Name, e.g. 某某变压器及电网配电设备有限公司>",
+    "type": "<Company Type, e.g. 中高压电力变压器与输配网设备制造厂商>",
+    "products": ["干式变压器", "油浸式变压器", "箱式变电站", "绝缘件"],
+    "targetOems": ["西门子", "施耐德", "ABB", "国家电网"],
     "targetRegions": ["国内", "欧洲", "中东"]
   },
   "onboardingComplete": true

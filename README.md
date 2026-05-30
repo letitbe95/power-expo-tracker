@@ -73,10 +73,10 @@ node prepare-digest.js
     "feishuWebhookUrl": "https://open.feishu.cn/open-apis/bot/v2/hook/xxxx"
   },
   "companyProfile": {
-    "name": "浙江开化七一电器股份有限公司",
-    "type": "中高压电力装备与电网绝缘器件制造厂商",
-    "products": ["固封极柱", "套管", "绝缘子", "触头盒", "开关柜"],
-    "targetOems": ["施耐德", "伊顿", "西门子", "东芝", "ABB", "国家电网", "南方电网"],
+    "name": "某某变压器及电网配电设备有限公司",
+    "type": "中高压电力变压器与输配网设备制造厂商",
+    "products": ["干式变压器", "油浸式变压器", "箱式变电站", "绝缘件"],
+    "targetOems": ["西门子", "施耐德", "ABB", "国家电网"],
     "targetRegions": ["国内", "欧洲", "中东"]
   },
   "onboardingComplete": true
