@@ -51,33 +51,14 @@ graph TD
 ## 🚀 快速上手 (Quick Start)
 
 ### 1. 环境准备
-确保您的本地安装了 Node.js (v18+)。在项目 `scripts` 目录安装依赖：
+确保您的本地安装了 Node.js (v18+)。
 ```bash
-cd power-expo-tracker/scripts
-npm install
+git clone https://github.com/letitbe95/power-expo-tracker.git .agent/skills/power-expo-tracker
 ```
+### 2. 在agent应用中使用这个skill
+示例：/power-expo-tracker 我是西门子公司的，帮我收集一下电力行业相关的展会信息，每天早上8点发到我的飞书上
 
-### 2. 同步云端数据 (免本地反爬 & 极速推荐 🌟)
-如果您已配置 GitHub Action 每天定时更新云端展会数据，本地无需运行耗时的爬虫脚本。直接运行同步脚本即可从远程 GitHub 仓库直接拉取最新的清洗后数据：
-```bash
-node fetch-remote-feed.js
-```
-该命令会在 1 秒内自动完成云端数据同步，完全免去本地反爬和封 IP 的烦恼。
-
-### 3. 本地执行全量抓取 (备用)
-如果您需要在本地直接向所有官网发起实时抓取：
-```bash
-# 采集并清洗最新展会数据，生成静态 feed
-node generate-feed.js
-```
-
-### 4. 编排并执行测试
-同步或抓取完数据后，可以随时手动运行数据编排测试：
-```bash
-# 编排打包 LLM 数据包（包括展会源、个人配置、提示词模板）
-node prepare-digest.js
-```
-
+所有配置都可通过和ai对话完成
 ---
 
 ## 🛠 配置文件说明
