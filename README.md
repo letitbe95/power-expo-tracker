@@ -14,9 +14,18 @@
 
 ```mermaid
 graph TD
-    A[数据源 config/default-sources.json] --> B[generate-feed.js 采集与清洗]
+    A[数据源 config/default-sources.json] --> B[generate-feed.js 本地/云端采集]
     
-    subgraph 数据采集层
+    subgraph 云端 GitHub Actions (免开机)
+        B1[定时触发 Cloud Scraper] -->|执行并清洗| B2[更新远程仓库 JSON]
+    end
+    
+    subgraph 本地数据准备方式
+        LocalScrape[node generate-feed.js 本地爬取] --> J[生成 feed-exhibitions.json]
+        B2 -->|node fetch-remote-feed.js 极速同步| J
+    end
+    
+    subgraph 数据采集层 (Scrapers)
         B -->|Cheerio 解析| C[EP Shanghai 官网]
         B -->|HTTP/iCal 探测| D[ees Europe 德国展]
         B -->|HTTP/iCal 探测| E[POWERGEN 北美展]
@@ -25,7 +34,7 @@ graph TD
     end
     
     B -->|过期过滤 & 存量去重| I[更新 state-feed.json]
-    B -->|发布最新展会 Feed| J[生成 feed-exhibitions.json]
+    B --> J
     
     subgraph AI 重混与物理过滤层
         J --> K[prepare-digest.js 编排打包]
@@ -42,19 +51,30 @@ graph TD
 ## 🚀 快速上手 (Quick Start)
 
 ### 1. 环境准备
-确保你的本地安装了 Node.js (v18+)。在项目 `scripts` 目录安装依赖：
+确保您的本地安装了 Node.js (v18+)。在项目 `scripts` 目录安装依赖：
 ```bash
 cd power-expo-tracker/scripts
 npm install
 ```
 
-### 2. 本地执行测试
-你可以随时通过命令行手动触发数据更新：
+### 2. 同步云端数据 (免本地反爬 & 极速推荐 🌟)
+如果您已配置 GitHub Action 每天定时更新云端展会数据，本地无需运行耗时的爬虫脚本。直接运行同步脚本即可从远程 GitHub 仓库直接拉取最新的清洗后数据：
 ```bash
-# 1. 采集并清洗最新展会数据，生成静态 feed
-node generate-feed.js
+node fetch-remote-feed.js
+```
+该命令会在 1 秒内自动完成云端数据同步，完全免去本地反爬和封 IP 的烦恼。
 
-# 2. 编排打包 LLM 数据包（包括展会源、个人配置、提示词模板）
+### 3. 本地执行全量抓取 (备用)
+如果您需要在本地直接向所有官网发起实时抓取：
+```bash
+# 采集并清洗最新展会数据，生成静态 feed
+node generate-feed.js
+```
+
+### 4. 编排并执行测试
+同步或抓取完数据后，可以随时手动运行数据编排测试：
+```bash
+# 编排打包 LLM 数据包（包括展会源、个人配置、提示词模板）
 node prepare-digest.js
 ```
 
