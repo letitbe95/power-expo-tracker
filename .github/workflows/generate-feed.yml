@@ -29,18 +29,18 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd power-expo-tracker/scripts
+          cd scripts
           npm install
 
       - name: Execute Feed Generator
         run: |
-          cd power-expo-tracker/scripts
+          cd scripts
           node generate-feed.js
 
       - name: Commit and Push Updated Feed Data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add power-expo-tracker/feed-exhibitions.json power-expo-tracker/state-feed.json
+          git add feed-exhibitions.json state-feed.json
           git diff --cached --quiet || git commit -m "chore: update power exhibitions feed [skip ci]"
           git push
