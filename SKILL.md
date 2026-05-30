@@ -96,10 +96,10 @@ RESEND_API_KEY=paste_key_here
 
 When triggered (automatically or by typing `/expo` or `/ai-expo`):
 
-### Step 1: Execute Feed Generator
-Run the central scraper:
+### Step 1: Execute Feed Sync
+Sync pre-compiled exhibition data from the remote repository:
 ```bash
-cd <PROJECT_ROOT>/scripts && node generate-feed.js
+cd <PROJECT_ROOT>/scripts && node fetch-remote-feed.js
 ```
 
 ### Step 2: Gather LLM Context

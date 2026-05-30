@@ -52,7 +52,7 @@ async function main() {
       errors.push(`Could not read feed file: ${err.message}`);
     }
   } else {
-    errors.push(`Feed file not found at ${LOCAL_FEED_PATH}. Please run generate-feed.js first.`);
+    errors.push(`Feed file not found at ${LOCAL_FEED_PATH}. Please run fetch-remote-feed.js first.`);
   }
 
   // 3. Load prompts (Priority: User Customized > Project default)
