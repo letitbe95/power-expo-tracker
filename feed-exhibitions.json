@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-02T09:09:03.362Z",
+  "generatedAt": "2026-08-03T10:42:49.136Z",
   "exhibitionsCount": 4,
   "exhibitions": [
     {
@@ -65,6 +65,6 @@
     }
   ],
   "errors": [
-    "EventsEye scrape failed: fetch failed"
+    "EventsEye: HTTP error 404 (Likely cloud IP blocking. Skipping gracefully for Local Mode fallback)"
   ]
 }
